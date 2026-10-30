@@ -105,6 +105,34 @@ public class Caballero extends Combatiente {
     return danioNuevo;
 
 }
+    
+    public void DanoRecibido(int danio)
+    {
+        switch(casa)
+        {   //STARK
+            case 1:
+                //Recibe 2 puntos menos de daño
+                danio -= 2;
+                break;
+            //LANNISTER
+            case 2:
+                //recibe 2 puntos mas de daño
+                danio += 2;
+                break;
+
+        }
+        // Esto es opcional pero es una proteccion por si se cambia algo del juego.
+        //Ejemplo: Si STARK recibe 1 de daño, la reduccion de 2 puntos de daño, haria que recuperara vida en el metodo padre.
+        if (danio < 0)
+            {
+                danio = 0;
+            }
+
+        //Llamo al metodo de la clase padre para que guarde el daño aplicado en este metodo, y lo aplique en su metodo.
+        super.recibirDanio(danio);
+    }   
+
+
 
 
 }
