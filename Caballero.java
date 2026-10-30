@@ -82,6 +82,7 @@ public class Caballero extends Combatiente {
             //TARGARYEN    
             case 3:
                 //Probabilidad de critico
+                danioNuevo = atacar();
                 double Probabilidad = Math.random();
                 if(Probabilidad < 0.15)
                 {
@@ -92,7 +93,7 @@ public class Caballero extends Combatiente {
 
             //BARATHEON
             case 4:
-               danioNuevo = cargasFuria * 3;
+               danioNuevo = atacar() + (cargasFuria * 3);
                cargasFuria= 0;
                break;
 
@@ -104,5 +105,6 @@ public class Caballero extends Combatiente {
     return danioNuevo;
 
 }
+
 
 }
