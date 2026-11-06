@@ -1,48 +1,37 @@
-public class Caballero extends Combatiente {
+public class Caballero extends Combatiente implements IDefendible
+{
 
-    private int casa;
+    private final int casa;
     private int cantidadPociones;
-    private int usosDagas;
     private int cargasFuria;
+    private boolean protegiendo;
+    private int[] pociones;
 
     public Caballero(String nombre, int casa) {
         super(nombre, 100,100, 10, 20);
 
         this.casa = casa;
         this.cantidadPociones = 3;
-        this.usosDagas = 5;
         this.cargasFuria= 0;
+        this.pociones = new int[3];
+        for (int i = 0; i < pociones.length; i++) 
+        {
+            pociones[i]= 1;
+        }
+        this.protegiendo= false;
+        
     }
 
-
-    public void setCasa(int casa)
-    {
-        this.casa = casa;
-    }
 
     public int getCasa()
     {
         return this.casa;
     }
 
-    public void setCantidadPociones(int cantidadPociones)
-    {
-        this.cantidadPociones = cantidadPociones;
-    }
 
     public int getCantidadPociones()
     {
         return this.cantidadPociones;
-    }
-
-    public void setUsosDagas (int usosDagas)
-    {
-        this.usosDagas = usosDagas;
-    }
-
-    public int getUsosDagas ()
-    {
-        return this.usosDagas;
     }
     
 
@@ -86,7 +75,7 @@ public class Caballero extends Combatiente {
                 double Probabilidad = Math.random();
                 if(Probabilidad < 0.15)
                 {
-                danioNuevo = atacar() + 5; 
+                danioNuevo += 5; 
                 System.out.println("¡GOLPE CRÍTICO! +5 DE DAÑO");
                 }
                 break;
@@ -97,17 +86,24 @@ public class Caballero extends Combatiente {
                cargasFuria= 0;
                break;
 
+            //Caballero Errante
             default:
-                System.out.println("No es una casa existente");
+                danioNuevo = atacar();
                 break;
             
     }
     return danioNuevo;
 
-}
+    }
     
-    public void DanoRecibido(int danio)
+    @Override 
+    public void recibirDanio(int danio)
     {
+        if (protegiendo) //El método protegerse() activa esta condición
+        {
+        danio -= 3;
+        protegiendo = false;
+        }
         switch(casa)
         {   //STARK
             case 1:
@@ -118,7 +114,7 @@ public class Caballero extends Combatiente {
             case 2:
                 //recibe 2 puntos mas de daño
                 danio += 2;
-                break;
+                break;  
 
         }
         // Esto es opcional pero es una proteccion por si se cambia algo del juego.
@@ -130,9 +126,67 @@ public class Caballero extends Combatiente {
 
         //Llamo al metodo de la clase padre para que guarde el daño aplicado en este metodo, y lo aplique en su metodo.
         super.recibirDanio(danio);
-    }   
+    } 
 
+    @Override 
+    public void protegerse()
+    {
+        this.protegiendo = true;
+        if (casa == 4) //Si la casa es Baratheon y se protege, acumula furia
+            {
+                acumularFuria();
+            }
 
+    }
+
+    public void usarPocion()
+    {
+        if (this.cantidadPociones > 0) //Se comprueba si hay pociones disponibles
+            {
+                if (getVida() < getVidaMaxima()) //Se comprueba si el caballero no tiene la vida al maximo
+                    {
+                        recuperarVida(25);//Recupera 25 de vida!
+                        System.out.println("¡Has recuperado 25 de vida!");
+                        for (int i = 0; i < pociones.length; i ++)
+                            {
+                                if (pociones [i] == 1) // Comprueba si hay una pocion en el array 
+                                {
+                                   pociones [i]= 0; //Una posicion de la array devolvera 0.
+                                   this.cantidadPociones --;//Pocion consumida
+                                   break; //Evita que se consuma todas las pociones disponibles
+                                } 
+                            }
+                        
+                    }
+            
+                else           
+                {
+                    System.out.println("¡Tienes la vida al Máximo!");
+                }
+
+            }
+        else
+            {
+                System.out.println("¡No tienes pociones de vida disponibles!");
+            } 
+    }
+
+    public void mostrarInventario()
+    {
+        System.out.println("=== INVENTARIO ===");
+
+        for (int i = 0; i < pociones.length; i++)
+        {
+           
+            if (pociones[i] == 1)
+            {
+              System.out.println("1 Poción de vida"); // Imprimira este mensaje en las posiciones de array que sean iaguales a 1
+
+            }
+        }
+        System.out.println("Pociones de vida disponibles: " + cantidadPociones);
+    
+    }
 
 
 }

@@ -12,7 +12,7 @@ public class Combatiente
         this.vida = vida;
         this.vidaMaxima = vidaMaxima;
         this.danioMaximo = danioMaximo;
-        this. danioMinimo = danioMinimo;
+        this.danioMinimo = danioMinimo;
 
     }
 
@@ -81,9 +81,23 @@ public class Combatiente
 
     }
 
-    public void mostarEstado()
+    public void mostrarEstado()
     {
         System.out.println(getNombre() + " tiene " + getVida() + " puntos de vida.");
+    }
+
+    public void recuperarVida(int cantidad)
+    {
+        if (cantidad > 0) //Se asegura que la cantidad de recuperacion de vida sea positivo
+        {
+        this.vida += cantidad;
+        
+        if (this.vida > this.vidaMaxima) //Evita que la vida sobrepase la vida maxima
+            {
+                this.vida = this.vidaMaxima;
+            }
+        }
+        
     }
 
 }
