@@ -37,7 +37,47 @@ public class Combate
 
     public void procesarTurno()
     {
+        boolean consumeTurno = false;
+        boolean continuarCombate = true;
+        int opcion;
+
+        mostarOpciones();
+        opcion = sc.nextInt();
         
+        switch (opcion) {
+            case 1:
+                int danio = caballero.calcularDanio();
+                enemigo.recibirDanio(danio);
+                consumeTurno = true;
+                break;
+            case 2:
+                caballero.protegerse();
+                consumeTurno = true;
+                break;
+            case 3:        
+                consumeTurno = caballero.usarPocion();
+                break;
+            case 4:
+                caballero.mostrarInventario(); 
+                break;
+            case 5:
+                continuarCombate = false;
+                break;
+            default:
+                System.out.println("No es una opción valida, intenta de nuevo!");
+                break;
+
+        }
+    }
+
+    public void simularCombate()
+    {
+        while (caballero.estaVivo() && enemigo.estaVivo()) 
+        {
+             
+            
+        }
+
     }
 
 
