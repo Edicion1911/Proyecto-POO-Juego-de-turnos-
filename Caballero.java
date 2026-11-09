@@ -139,8 +139,10 @@ public class Caballero extends Combatiente implements IDefendible
 
     }
 
-    public void usarPocion()
+    public boolean usarPocion()
     {
+    boolean consumirPocion;
+    
         if (this.cantidadPociones > 0) //Se comprueba si hay pociones disponibles
             {
                 if (getVida() < getVidaMaxima()) //Se comprueba si el caballero no tiene la vida al maximo
@@ -156,19 +158,23 @@ public class Caballero extends Combatiente implements IDefendible
                                    break; //Evita que se consuma todas las pociones disponibles
                                 } 
                             }
-                        
+                        consumirPocion = true;
                     }
             
                 else           
                 {
                     System.out.println("¡Tienes la vida al Máximo!");
+                    consumirPocion = false;
                 }
 
             }
         else
             {
                 System.out.println("¡No tienes pociones de vida disponibles!");
+                consumirPocion = false;
             } 
+            
+    return consumirPocion;
     }
 
     public void mostrarInventario()

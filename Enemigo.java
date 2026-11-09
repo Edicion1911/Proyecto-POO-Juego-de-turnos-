@@ -18,7 +18,7 @@ public class Enemigo extends Combatiente implements IDefendible
     @Override 
     public void protegerse()
     {
-        this.protegiendo= true;
+        this.protegiendo = true;
     }
 
     @Override 
