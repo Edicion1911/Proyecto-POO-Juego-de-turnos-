@@ -18,10 +18,11 @@ public class Combate
     public void mostrarEstadoCombate()
     {
         System.out.println("=== ESTADO DEL COMBATE ===");
-
+        System.out.println("");
         caballero.mostrarEstado();
-    
+        System.out.println("");
         enemigo.mostrarEstado();
+        System.out.println("===========================");
     }
 
     public void mostarOpciones()
@@ -49,12 +50,15 @@ public class Combate
         switch (opcion) {
             case 1:
                 int danio = caballero.calcularDanio();
-                enemigo.recibirDanio(danio);
+                int danioRecibido= enemigo.recibirDanio(danio);
                 consumeTurno = true;
+                System.out.println(caballero.getNombre() + " le ha causado " + danioRecibido + " puntos de daño a " + enemigo.getNombre());
+                System.out.println("");
                 break;
             case 2:
                 caballero.protegerse();
                 consumeTurno = true;
+                System.out.println(caballero.getNombre() + " se ha protegido para el siguiente ataque.");
                 break;
             case 3:        
                 consumeTurno = caballero.usarPocion();
@@ -78,13 +82,13 @@ public class Combate
     {
         double probabilidad = Math.random();
 
-        if (probabilidad < 0.7)
+        if (probabilidad < 0.7) //70% de probabilidad de atacar
             {
                 int danio = enemigo.calcularDanio();
-                caballero.recibirDanio(danio);
-                System.out.println(enemigo.getNombre() + " le ha causado " + danio + " daño a " + caballero.getNombre());
+                int danioRecibido= caballero.recibirDanio(danio);
+                System.out.println(enemigo.getNombre() + " le ha causado " + danioRecibido + " puntos de daño a " + caballero.getNombre());
             }
-        else 
+        else  //30% de probabilidad de protegerse
             {
                 enemigo.protegerse();
                 System.out.println(enemigo.getNombre() + " ha decidido protegerse en este turno." );
@@ -105,12 +109,26 @@ public class Combate
                 {
                     turnoEnemigo();
                 }
-            
         }
+        mostrarEstadoCombate();
+        finalizarCombate();
 
     }
 
-
-
+    public void finalizarCombate()
+    {
+        if (!caballero.estaVivo())
+        {
+            System.out.println("¡Has sido derrotado!");
+        }
+        else if (!enemigo.estaVivo())
+        {
+            System.out.println("¡Has derrotado a " + enemigo.getNombre() + "! ¡Felicidades!");
+        }
+        else if(!continuarCombate)
+        {
+            System.out.println("¡Has abandonado el combate!");
+        }
+    }
 
 }

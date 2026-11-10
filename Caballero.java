@@ -97,7 +97,7 @@ public class Caballero extends Combatiente implements IDefendible
     }
     
     @Override 
-    public void recibirDanio(int danio)
+    public int recibirDanio(int danio)
     {
         if (protegiendo) //El método protegerse() activa esta condición
         {
@@ -125,7 +125,7 @@ public class Caballero extends Combatiente implements IDefendible
             }
 
         //Llamo al metodo de la clase padre para que guarde el daño aplicado en este metodo, y lo aplique en su metodo.
-        super.recibirDanio(danio);
+        return super.recibirDanio(danio);
     } 
 
     @Override 
@@ -147,8 +147,10 @@ public class Caballero extends Combatiente implements IDefendible
             {
                 if (getVida() < getVidaMaxima()) //Se comprueba si el caballero no tiene la vida al maximo
                     {
+                        int vidaAnterior = getVida();
                         recuperarVida(25);//Recupera 25 de vida!
-                        System.out.println("¡Has recuperado 25 de vida!");
+                        int vidaRecuperada= getVida() - vidaAnterior;
+                        System.out.println("¡Has recuperado "+ vidaRecuperada + " de vida!");
                         for (int i = 0; i < pociones.length; i ++)
                             {
                                 if (pociones [i] == 1) // Comprueba si hay una pocion en el array 

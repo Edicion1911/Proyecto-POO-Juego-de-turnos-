@@ -56,13 +56,16 @@ public class Combatiente
         this.danioMinimo = danioMinimo;
     }
 
-    public void recibirDanio(int danio)
+    public int recibirDanio(int danio)
     {
         this.vida -= danio; //Daño aplicado a la vida
         if (this.vida < 0) //Evita que la vida este en negativo, en caso de que el daño sobrepase la vida
             {
                 this.vida= 0;
             }
+
+        return danio;
+        
     }
 
     public boolean estaVivo() //Determina si esta vivo o no.

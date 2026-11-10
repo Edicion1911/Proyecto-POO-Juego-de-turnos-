@@ -22,7 +22,7 @@ public class Enemigo extends Combatiente implements IDefendible
     }
 
     @Override 
-    public void recibirDanio(int danio)
+    public int recibirDanio(int danio)
     {
         if (protegiendo)
             {
@@ -52,7 +52,7 @@ public class Enemigo extends Combatiente implements IDefendible
          danio = 0;
         }
 
-        super.recibirDanio(danio);
+        return super.recibirDanio(danio);
     }
 
     public int calcularDanio()
