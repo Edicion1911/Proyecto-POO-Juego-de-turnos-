@@ -5,11 +5,14 @@ public class Combate
     private Enemigo enemigo;
     private Caballero caballero;
     private Scanner sc;
+    private boolean continuarCombate;
 
     public Combate(Caballero caballero, Enemigo enemigo)
     {
     this.caballero = caballero;
     this.enemigo = enemigo;
+    this.sc= new Scanner(System.in);
+    this.continuarCombate = true;
     } 
 
     public void mostrarEstadoCombate()
@@ -35,10 +38,9 @@ public class Combate
 
     }
 
-    public void procesarTurno()
+    public boolean procesarTurno()
     {
         boolean consumeTurno = false;
-        boolean continuarCombate = true;
         int opcion;
 
         mostarOpciones();
@@ -68,13 +70,41 @@ public class Combate
                 break;
 
         }
+
+        return consumeTurno;
+    }
+
+    public void turnoEnemigo()
+    {
+        double probabilidad = Math.random();
+
+        if (probabilidad < 0.7)
+            {
+                int danio = enemigo.calcularDanio();
+                caballero.recibirDanio(danio);
+                System.out.println(enemigo.getNombre() + " le ha causado " + danio + " daño a " + caballero.getNombre());
+            }
+        else 
+            {
+                enemigo.protegerse();
+                System.out.println(enemigo.getNombre() + " ha decidido protegerse en este turno." );
+            }    
+
     }
 
     public void simularCombate()
     {
-        while (caballero.estaVivo() && enemigo.estaVivo()) 
+        continuarCombate = true;
+        while (caballero.estaVivo() && enemigo.estaVivo() && continuarCombate) 
         {
-             
+             mostrarEstadoCombate();
+
+             boolean consumeTurno = procesarTurno();
+
+             if (consumeTurno && enemigo.estaVivo() && caballero.estaVivo())
+                {
+                    turnoEnemigo();
+                }
             
         }
 

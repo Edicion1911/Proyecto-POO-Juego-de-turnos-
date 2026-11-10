@@ -55,5 +55,29 @@ public class Enemigo extends Combatiente implements IDefendible
         super.recibirDanio(danio);
     }
 
+    public int calcularDanio()
+    {
+        int danioNuevo = atacar();
+        switch (ventaja) 
+        {
+            case 2: //BARRISTAN
+                double probabilidad = Math.random();
+                if(probabilidad < 0.15)
+                {
+                danioNuevo += 5; 
+                System.out.println("¡GOLPE CRÍTICO! +5 DE DAÑO");
+                }
+                break;
+            case 3://ATHUR DAYNE    
+                danioNuevo += 3;
+                break;
+                
+            default:
+                break;
+        }
+
+        return danioNuevo;
+    }
+
 
 }

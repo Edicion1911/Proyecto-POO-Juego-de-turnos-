@@ -72,8 +72,8 @@ public class Caballero extends Combatiente implements IDefendible
             case 3:
                 //Probabilidad de critico
                 danioNuevo = atacar();
-                double Probabilidad = Math.random();
-                if(Probabilidad < 0.15)
+                double probabilidad = Math.random();
+                if(probabilidad < 0.15)
                 {
                 danioNuevo += 5; 
                 System.out.println("¡GOLPE CRÍTICO! +5 DE DAÑO");
