@@ -150,6 +150,7 @@ public class Caballero extends Combatiente implements IDefendible
                         int vidaAnterior = getVida();
                         recuperarVida(25);//Recupera 25 de vida!
                         int vidaRecuperada= getVida() - vidaAnterior;
+                        System.out.println(getNombre() + ": \n");
                         System.out.println("¡Has recuperado "+ vidaRecuperada + " de vida!");
                         for (int i = 0; i < pociones.length; i ++)
                             {
