@@ -18,10 +18,10 @@ public class Combate
     public void mostrarEstadoCombate()
     {
         System.out.println("=== ESTADO DEL COMBATE ===\n");
-        System.out.println(caballero.getNombre() + ": \n");
+        caballero.mostrarPresentacion();
         caballero.mostrarEstado();
         System.out.println("");
-        System.out.println(enemigo.getNombre() + " : \n");
+        System.out.println(enemigo.getNombre());
         enemigo.mostrarEstado();
         System.out.println("\n===========================");
     }
@@ -53,15 +53,15 @@ public class Combate
                 int danio = caballero.calcularDanio();
                 int danioRecibido= enemigo.recibirDanio(danio);
                 consumeTurno = true;
-                System.out.println(caballero.getNombre() + ": \n");
-                System.out.println(caballero.getNombre() + " le ha causado " + danioRecibido + " puntos de daño a " + enemigo.getNombre());
+                caballero.mostrarPresentacion();
+                System.out.println("Ha atacado y le ha causado " + danioRecibido + " puntos de daño a " + enemigo.getNombre());
                 System.out.println("");
                 break;
             case 2:
                 caballero.protegerse();
                 consumeTurno = true;
-                System.out.println(caballero.getNombre() + ": \n");
-                System.out.println(caballero.getNombre() + " se ha protegido para el siguiente ataque.");
+                caballero.mostrarPresentacion();
+                System.out.println("Se ha protegido para el siguiente ataque.\n");
                 break;
             case 3:        
                 consumeTurno = caballero.usarPocion();
@@ -89,13 +89,13 @@ public class Combate
             {
                 int danio = enemigo.calcularDanio();
                 int danioRecibido= caballero.recibirDanio(danio);
-                System.out.println(enemigo.getNombre() + ": \n");
-                System.out.println(enemigo.getNombre() + " le ha causado " + danioRecibido + " puntos de daño a " + caballero.getNombre());
+                System.out.println(enemigo.getNombre());
+                System.out.println(enemigo.getNombre() + " te ha causado " + danioRecibido + " puntos de daño.");
             }
         else  //30% de probabilidad de protegerse
             {
                 enemigo.protegerse();
-                System.out.println(enemigo.getNombre() + ": \n");
+                System.out.println(enemigo.getNombre());
                 System.out.println(enemigo.getNombre() + " ha decidido protegerse en este turno." );
             }    
 

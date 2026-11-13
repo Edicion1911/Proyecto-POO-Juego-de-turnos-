@@ -86,7 +86,7 @@ public class Combatiente
 
     public void mostrarEstado()
     {
-        System.out.println(getNombre() + " tiene " + getVida() + " puntos de vida.");
+        System.out.println("Vida: " + getVida() + "/" + getVidaMaxima() + " HP.");
     }
 
     public void recuperarVida(int cantidad)

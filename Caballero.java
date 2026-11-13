@@ -33,6 +33,29 @@ public class Caballero extends Combatiente implements IDefendible
     {
         return this.cantidadPociones;
     }
+
+    public String getNombreCasa()
+    {
+        switch (casa) 
+        {
+            case 1:
+                return "Stark";
+            case 2:
+                return "Lannister";
+            case 3:
+                return "Targaryen";
+            case 4:
+                return "Baratheon";
+            default:
+                return "El errante";          
+        }
+        
+    }
+
+    public void mostrarPresentacion()
+    {
+        System.out.println("Sir " + getNombre() + " " + getNombreCasa());
+    }
     
 
     //Metódo de acumula las cargas para ventaja BARATHEON
@@ -150,8 +173,8 @@ public class Caballero extends Combatiente implements IDefendible
                         int vidaAnterior = getVida();
                         recuperarVida(25);//Recupera 25 de vida!
                         int vidaRecuperada= getVida() - vidaAnterior;
-                        System.out.println(getNombre() + ": \n");
-                        System.out.println("¡Has recuperado "+ vidaRecuperada + " de vida!");
+                        mostrarPresentacion();
+                        System.out.println("¡Has recuperado "+ vidaRecuperada + " de vida!\n");
                         for (int i = 0; i < pociones.length; i ++)
                             {
                                 if (pociones [i] == 1) // Comprueba si hay una pocion en el array 
@@ -196,6 +219,8 @@ public class Caballero extends Combatiente implements IDefendible
         System.out.println("Pociones de vida disponibles: " + cantidadPociones);
     
     }
+
+
 
 
 }

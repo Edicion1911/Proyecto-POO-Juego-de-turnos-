@@ -109,6 +109,7 @@ public class Juego {
 
         System.out.println("¡Muy bien Sir " + nombre + "!");
         System.out.println("¡Elige la casa que quieres pertenecer!\n");
+        
         mostrarVentajas();
         System.out.print("Tu selección: ");
         int ventaja = sc.nextInt();
@@ -128,9 +129,6 @@ public class Juego {
                 System.out.println("¡Mucha Suerte en tu camino, Sir " + nombre + " Baratheon!\n");
                 break;
             default:
-                System.out.print("Escribe tu apodo: ");
-                String apodo = sc.nextLine();
-                System.out.println("¡Mucha Suerte en tu camino, Sir " + nombre + " " + apodo + "!\n");
                 break;
         } 
         Caballero caballero = new Caballero(nombre, ventaja);
