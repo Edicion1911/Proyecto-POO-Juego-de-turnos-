@@ -184,6 +184,7 @@ public class Caballero extends Combatiente implements IDefendible
                                    break; //Evita que se consuma todas las pociones disponibles
                                 } 
                             }
+                            System.out.println("Tienes " + cantidadPociones + " pociones disponibles!\n");
                         consumirPocion = true;
                     }
             

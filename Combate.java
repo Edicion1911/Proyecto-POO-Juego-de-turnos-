@@ -1,22 +1,21 @@
+
 import java.util.Scanner;
 
-public class Combate 
-{
+public class Combate {
+
     private Enemigo enemigo;
     private Caballero caballero;
     private Scanner sc;
     private boolean continuarCombate;
 
-    public Combate(Caballero caballero, Enemigo enemigo)
-    {
-    this.caballero = caballero;
-    this.enemigo = enemigo;
-    this.sc= new Scanner(System.in);
-    this.continuarCombate = true;
-    } 
+    public Combate(Caballero caballero, Enemigo enemigo) {
+        this.caballero = caballero;
+        this.enemigo = enemigo;
+        this.sc = new Scanner(System.in);
+        this.continuarCombate = true;
+    }
 
-    public void mostrarEstadoCombate()
-    {
+    public void mostrarEstadoCombate() {
         System.out.println("=== ESTADO DEL COMBATE ===\n");
         caballero.mostrarPresentacion();
         caballero.mostrarEstado();
@@ -26,8 +25,7 @@ public class Combate
         System.out.println("\n===========================");
     }
 
-    public void mostarOpciones()
-    {
+    public void mostrarOpciones() {
         System.out.println("=== TU TURNO ===");
         System.out.println();
         System.out.println("1. Atacar");
@@ -40,18 +38,27 @@ public class Combate
 
     }
 
-    public boolean procesarTurno()
-    {
+    public boolean procesarTurno() {
         boolean consumeTurno = false;
         int opcion;
 
-        mostarOpciones();
+        mostrarOpciones();
+        System.out.print("Tu selección: ");
+
+        while (!sc.hasNextInt()) {
+            System.out.println("Error: debes introducir un número.");
+            sc.nextLine();
+
+            System.out.print("Tu selección: ");
+        } //no permite letras.
+
         opcion = sc.nextInt();
-        
+        sc.nextLine();
+
         switch (opcion) {
             case 1:
                 int danio = caballero.calcularDanio();
-                int danioRecibido= enemigo.recibirDanio(danio);
+                int danioRecibido = enemigo.recibirDanio(danio);
                 consumeTurno = true;
                 caballero.mostrarPresentacion();
                 System.out.println("Ha atacado y le ha causado " + danioRecibido + " puntos de daño a " + enemigo.getNombre());
@@ -63,11 +70,11 @@ public class Combate
                 caballero.mostrarPresentacion();
                 System.out.println("Se ha protegido para el siguiente ataque.\n");
                 break;
-            case 3:        
+            case 3:
                 consumeTurno = caballero.usarPocion();
                 break;
             case 4:
-                caballero.mostrarInventario(); 
+                caballero.mostrarInventario();
                 break;
             case 5:
                 continuarCombate = false;
@@ -81,57 +88,46 @@ public class Combate
         return consumeTurno;
     }
 
-    public void turnoEnemigo()
-    {
+    public void turnoEnemigo() {
         double probabilidad = Math.random();
 
         if (probabilidad < 0.7) //70% de probabilidad de atacar
-            {
-                int danio = enemigo.calcularDanio();
-                int danioRecibido= caballero.recibirDanio(danio);
-                System.out.println(enemigo.getNombre());
-                System.out.println(enemigo.getNombre() + " te ha causado " + danioRecibido + " puntos de daño.");
-            }
-        else  //30% de probabilidad de protegerse
-            {
-                enemigo.protegerse();
-                System.out.println(enemigo.getNombre());
-                System.out.println(enemigo.getNombre() + " ha decidido protegerse en este turno." );
-            }    
+        {
+            int danio = enemigo.calcularDanio();
+            int danioRecibido = caballero.recibirDanio(danio);
+            System.out.println(enemigo.getNombre());
+            System.out.println(enemigo.getNombre() + " te ha causado " + danioRecibido + " puntos de daño.");
+        } else //30% de probabilidad de protegerse
+        {
+            enemigo.protegerse();
+            System.out.println(enemigo.getNombre());
+            System.out.println(enemigo.getNombre() + " ha decidido protegerse en este turno.");
+        }
 
     }
 
-    public void simularCombate()
-    {
+    public void simularCombate() {
         continuarCombate = true;
-        while (caballero.estaVivo() && enemigo.estaVivo() && continuarCombate) 
-        {
-             mostrarEstadoCombate();
+        while (caballero.estaVivo() && enemigo.estaVivo() && continuarCombate) {
+            mostrarEstadoCombate();
 
-             boolean consumeTurno = procesarTurno();
+            boolean consumeTurno = procesarTurno();
 
-             if (consumeTurno && enemigo.estaVivo() && caballero.estaVivo())
-                {
-                    turnoEnemigo();
-                }
+            if (consumeTurno && enemigo.estaVivo() && caballero.estaVivo()) {
+                turnoEnemigo();
+            }
         }
         mostrarEstadoCombate();
         finalizarCombate();
 
     }
 
-    public void finalizarCombate()
-    {
-        if (!caballero.estaVivo())
-        {
+    public void finalizarCombate() {
+        if (!caballero.estaVivo()) {
             System.out.println("\n¡Has sido derrotado!\n");
-        }
-        else if (!enemigo.estaVivo())
-        {
+        } else if (!enemigo.estaVivo()) {
             System.out.println("\n¡Has derrotado a " + enemigo.getNombre() + "! ¡Felicidades!\n");
-        }
-        else if(!continuarCombate)
-        {
+        } else if (!continuarCombate) {
             System.out.println("\n¡Has abandonado el combate!\n");
         }
     }

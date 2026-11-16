@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ranking>
+    <jugador>
+        <nombre>Jon</nombre>
+        <puntuacion>327</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Edixon</nombre>
+        <puntuacion>320</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Andres</nombre>
+        <puntuacion>200</puntuacion>
+    </jugador>
+</ranking>
