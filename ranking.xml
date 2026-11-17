@@ -5,11 +5,39 @@
         <puntuacion>327</puntuacion>
     </jugador>
     <jugador>
+        <nombre>Raeghar</nombre>
+        <puntuacion>326</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Harry</nombre>
+        <puntuacion>323</puntuacion>
+    </jugador>
+    <jugador>
         <nombre>Edixon</nombre>
         <puntuacion>320</puntuacion>
     </jugador>
     <jugador>
+        <nombre>Pepe</nombre>
+        <puntuacion>320</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Tywin</nombre>
+        <puntuacion>310</puntuacion>
+    </jugador>
+    <jugador>
         <nombre>Andres</nombre>
         <puntuacion>200</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Cersei</nombre>
+        <puntuacion>200</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Rodrigo</nombre>
+        <puntuacion>200</puntuacion>
+    </jugador>
+    <jugador>
+        <nombre>Martin</nombre>
+        <puntuacion>135</puntuacion>
     </jugador>
 </ranking>
