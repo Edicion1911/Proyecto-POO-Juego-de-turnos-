@@ -1,0 +1,42 @@
+/* Hoja de estilos externa del ranking.
+   Se enlaza desde ranking.html (generado por ranking.xsl) con una ruta relativa. */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #222222;
+    text-align: center;
+    margin: 2rem 1rem;
+}
+
+h1 {
+    color: #333333;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 60%;
+    min-width: 320px;
+    background-color: #ffffff;
+}
+
+th, td {
+    border: 1px solid #cccccc;
+    padding: 12px;
+}
+
+th {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+/* Mensaje que se muestra cuando el XML no tiene registros */
+.vacio {
+    font-style: italic;
+    color: #555555;
+}

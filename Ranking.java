@@ -125,6 +125,7 @@ public void guardarRanking()
 
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "ranking.dtd");
 
         DOMSource origen = new DOMSource(documento);
 
@@ -155,7 +156,9 @@ public void cargarRanking()
 
         DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
 
-        fabrica.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        fabrica.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        fabrica.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        fabrica.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
 
         DocumentBuilder constructor = fabrica.newDocumentBuilder();
 
